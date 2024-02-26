@@ -16,16 +16,16 @@ mp = 1.67e-27    # Mass of the nucleon (kg)
 # Charge Particle Parameters (here for ion)
 Z = 1            # Z of ion
 q = Z*e          # charge of ion
-N = 1            # total number of nucleons in ion
+N = 1           # total number of nucleons in ion
 m = N*mp         # mass of ion
 
 
 #Zeroth order magnetic field strength
-B0=3e-5; #Tesla
+B0 = 3e-5 #Tesla
 
 #calculate cyclotron frequency and associated period
-omega_c=q*B0/m;
-period=2*math.pi/omega_c;
+omega_c = q*B0/m
+period = 2*math.pi/omega_c
 
 # Initial conditions
 initial_position = np.array([0, 0, -1])   # Initial position vector (m)
@@ -57,22 +57,25 @@ times[0] = t_start
 # Fields as functions of position
 # Electric Field
 def E(x, y, z, t):
-    Ex= 0
-    # Ex = 1 + (1 + (300 * t)/(1000 * period))
-    Ey=0
-    Ez=0
+    # Ex = 0
+    # Ex = 1 + (300 * t)/(1000 * period)
+    Ex = 0
+    Ey = 0
+    # Ey = (0.5*m*(sperp**2)/ q)*B0/(1000*rL)
+    Ez = 0
     return np.array([Ex, Ey, Ez])
 
 # Magnetic Field
 def B(x, y, z, t):
-    Bx=0
-    By=0
-    # Bz=B0
+    Bx = 0
+    By = 0
+    # Bz = B0
     # Bz = B0*(1- (y/(1000*rL)))
     # Bz = B0*(1- (x/(1000*rL)))
     # Bz = B0*(1- (5*z/(1000*rL)))
-    # Bz = B0*(1 + (50*z/(1000*rL))**2)
-    Bz = B0*(1+ (100*t/ (1000*period)))
+    Bz = B0*(1 + (50*z/(1000*rL))**2)
+    # Bz = B0*(1 + np.sin(50*z/(1000*rL)))
+    # Bz = B0*(1+ (100*t/ (1000*period)))
     return np.array([Bx, By, Bz])
 
 
@@ -85,11 +88,11 @@ for i in range(num_steps-1):
     v = velocities[i]
     
     # Calculate electric and magnetic fields at current position
-    E_field = E(*r,times[i])
-    B_field = B(*r,times[i])
+    E_field = E(*r, times[i])
+    B_field = B(*r, times[i])
     
     # Calculate acceleration using Lorentz force equation
-    acceleration = (q / m) * (E_field + np.cross(v, B_field))
+    acceleration = (q / m)*(E_field + np.cross(v, B_field))
     
     # Update velocity and position using Euler's method
     velocities[i+1] = v + dt * acceleration
@@ -109,7 +112,6 @@ ax.set_xlabel('x (m)')
 ax.set_ylabel('y (m)')
 ax.set_zlabel('z (m)')
 ax.set_title('Particle Trajectory')
-
 
 
 #xy plot
