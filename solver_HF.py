@@ -53,7 +53,7 @@ omega_ci = electron_charge * B0 / ion_mass
 print(omega_ce/omega_pe)
 
 # Angle of Wave Vector
-angle = 85.0  # angle between k vector and B vector (in degrees)
+angle = 0.0  # angle between k vector and B vector (in degrees)
 angle_rad= angle*np.pi/180.0 # angle in radians
 
 # define input parameters for PlasmaPy
@@ -94,6 +94,7 @@ plt.scatter(k*c_light/omega_pe,
 # Add labels to the axes
 plt.xlabel('kc/$\omega_{pe}$',fontsize=fs)
 plt.ylabel('$\omega$/$\omega_{pe}$',fontsize=fs)
+plt.title('High frequency dispersion relation')
 
 # Set the ranges for the axes
 plt.xlim(0.01, 3)  
