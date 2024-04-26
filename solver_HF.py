@@ -53,7 +53,7 @@ omega_ci = electron_charge * B0 / ion_mass
 print(omega_ce/omega_pe)
 
 # Angle of Wave Vector
-angle = 0.0  # angle between k vector and B vector (in degrees)
+angle = 90.0  # angle between k vector and B vector (in degrees)
 angle_rad= angle*np.pi/180.0 # angle in radians
 
 # define input parameters for PlasmaPy
