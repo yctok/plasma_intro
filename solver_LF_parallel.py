@@ -93,6 +93,7 @@ plt.scatter(k*c_light/omega_pe,
 # Add labels to the axes
 plt.xlabel('kc/$\omega_{pe}$',fontsize=fs)
 plt.ylabel('$\omega$/$\omega_{pe}$',fontsize=fs)
+plt.title('Low frequency dispersion relation')
 
 # Set the ranges for the axes
 plt.xlim(0.0, 0.15)  
